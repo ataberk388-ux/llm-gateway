@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+packages/*/node_modules/
+
+# Build output
+dist/
+packages/*/dist/
+
+# Environment variables — NEVER commit secrets
+.env
+.env.*
+*.env
+
+# Claude Code project data — contains local session & plan files, not source code
+.claude/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# TypeScript build info
+*.tsbuildinfo

@@ -1,0 +1,38 @@
+detectors:
+  turkishPii:
+    enabled: true
+    entities:
+      tcId: true
+      phone: true
+      email: true
+      name: false   # regex-based; yanlış pozitif üretebilir, dikkatli kullan
+
+  financial:
+    enabled: true
+    entities:
+      iban: true
+      creditCard: true
+
+  medical:
+    enabled: true
+    entities:
+      diagnosisCodes: true
+      medications: true
+      patientId: true
+    medicationList:
+      - "Parol"
+      - "Augmentin"
+      - "Metformin"
+      - "Aspirin"
+      - "Ibuprofen"
+
+  keywords:
+    enabled: true
+    blocklist:
+      - "AcmeCorp"
+      - "Gizli"
+      - "Confidential"
+      - "Project Phoenix"
+    caseSensitive: false
+
+confidenceThreshold: 0.8

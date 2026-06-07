@@ -1,0 +1,68 @@
+server:
+  host: "0.0.0.0"
+  port: 3000
+  requestTimeout: 120000
+
+auth:
+  apiKeys:
+    - key: "${GW_API_KEY_1}"
+      clientId: "app-backend"
+
+session:
+  ttlSeconds: 1800
+
+rateLimit:
+  enabled: true
+  maxPerMinute: 60         # clientId başına dakikada maksimum istek
+
+# Redis etkinleştirmek için REDIS_URL set et, aksi hâlde in-memory kullanılır
+# redis:
+#   url: "${REDIS_URL}"   # örn: redis://localhost:6379
+
+provider:
+  type: "anthropic"
+  anthropic:
+    apiKey: "${ANTHROPIC_API_KEY}"
+    defaultModel: "claude-opus-4-8"
+
+  # OpenAI için:
+  # type: "openai"
+  # openai:
+  #   apiKey: "${OPENAI_API_KEY}"
+  #   defaultModel: "gpt-4o"
+
+  # Azure OpenAI için:
+  # type: "azure-openai"
+  # azure:
+  #   apiKey: "${AZURE_OPENAI_API_KEY}"
+  #   endpoint: "https://my-resource.openai.azure.com"
+  #   apiVersion: "2024-02-01"
+  #   deployment: "my-gpt4o-deployment"
+  #   defaultModel: "gpt-4o"
+
+logging:
+  level: "info"
+  prettyPrint: false
+
+# Admin Dashboard — GET /admin/stats  ve  GET /admin/compliance-report
+# adminKey boş bırakılırsa geliştirme modunda açık kalır
+admin:
+  enabled: true
+  adminKey: "${GW_ADMIN_KEY}"
+
+# Webhook Alerting — CRITICAL risk veya yanıtta yeni PII tespit edilince tetiklenir
+# alerts:
+#   enabled: true
+#   webhooks:
+#     - name: "slack"
+#       url: "${SLACK_WEBHOOK_URL}"
+#       events: ["CRITICAL_RISK", "NEW_PII_IN_RESPONSE"]
+#     - name: "pagerduty"
+#       url: "${PAGERDUTY_WEBHOOK_URL}"
+#       events: ["CRITICAL_RISK"]
+
+# Çoklu Provider Routing — risk tabanlı yönlendirme kuralları
+# routing:
+#   rejectCritical: false        # true = CRITICAL risk istekleri reddeder (451)
+#   costOptimize: false          # true = PII içermeyen LOW risk için ucuz model
+#   cheapModel: "claude-haiku-4-5-20251001"
